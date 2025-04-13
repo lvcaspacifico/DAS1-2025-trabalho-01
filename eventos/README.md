@@ -1,35 +1,17 @@
-# Arquitetura baseada em Eventos
+# Design e Arquitetura de Software 1 - Trabalho 01 | Chat de mensagens
 
-## Tópicos
-![Topicos](./diagramas/topicos.png)
+**Desafio:**
 
-[Install Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
+> Implementar um cliente de CHAT em java que conecte ao tópico no Azure Service Bus utilizano o código básico disponível no repositório 
+> https://github.com/waltercoan/das-1-2025/tree/main/eventos/src/main/java/br/univille/ativchat
 
-1. Realizar o login no Azure lindo ❤️, com a conta da UNIVILLE
-```bash
-az login
-```
 
-[Padrão de nomenclatura de recursos](https://learn.microsoft.com/pt-br/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming)
+## Notas
 
-2. Como criar um grupo de recurso
-```bash
-az group create --name rg-das12025-test-brazilsouth --location brazilsouth
-```
+Pra sincronizar as mensagens, o tempo de espera é 7 segundos. Expus ao professor que isso poderia ser demais ou de menos dependendo da quantidade de mensagens, mas a alternativa trava a thread da interface devido ao funcionamento do ServiceBus nunca parar de rodar
 
-3. Como criar uma instancia do [Azure Service Bus](https://learn.microsoft.com/en-us/azure/service-bus-messaging/service-bus-messaging-overview)
+* Não é possível enviar uma mensagem vazia
+* Não é possível enviar uma mensagem com >1000 caracteres
+* A sincronização é de 7 em 7 segundos, o que vier nesse tempo veio
 
-```bash
-az servicebus namespace create --resource-group rg-das12025-test-brazilsouth --name sb-das12025-test-brazilsouth --location brazilsouth --sku Standard
-```
-4. Criar o tópico
-```bash
-az servicebus topic create --resource-group rg-das12025-test-brazilsouth --namespace-name sb-das12025-test-brazilsouth --name topic-das1
-```
-
-5. Criar a Subscription
-```bash
-az servicebus topic subscription create --resource-group rg-das12025-test-brazilsouth --namespace-name sb-das12025-test-brazilsouth --topic-name topic-das1 --name subscription-walter
-```
-
-6. [Exemplo de código em Java](https://learn.microsoft.com/en-us/azure/service-bus-messaging/service-bus-java-how-to-use-topics-subscriptions?tabs=passwordless)
+![https://i.imgur.com/BkKsezu.png](https://i.imgur.com/BkKsezu.png)

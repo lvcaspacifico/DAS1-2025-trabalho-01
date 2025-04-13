@@ -17,6 +17,7 @@ public class Form extends JFrame{
     private JTextArea txtChat;
     private JTextField txtNovaMsg;
     private JButton btnEnviar;
+    private JButton btnBuscar;
     private String nome;
     private Controller controller = new Controller(this);
 
@@ -63,10 +64,30 @@ public class Form extends JFrame{
         jpnSul.setBounds(0, 350, 300, 50);
         txtNovaMsg = new JTextField(20);
         btnEnviar = new JButton("Enviar");
+        btnBuscar = new JButton("🔁");
         jpnSul.add(txtNovaMsg);
         jpnSul.add(btnEnviar);
+        jpnSul.add(btnBuscar);
         btnEnviar.addActionListener(controller);
+        btnBuscar.addActionListener(controller); 
         getContentPane().add(jpnSul, "South");
     }
 
+    public JButton getBtnEnviar() {
+        return btnEnviar;
+    }
+    
+    public JButton getBtnBuscar() {
+        return btnBuscar;
+    }
+
+    // criei esse pra adicionar as mensagens na janela do chat
+    public void adicionarMensagemNoChat(String msg) {
+        txtChat.append(msg + "\n");
+    }
+
+    // e esse pra fazer uma frescurinha visual
+    public void adicionarLinhaSeparadoraNoChat(){
+        txtChat.append("--------------------------------------------------------------------------------------------\n");
+    }
 }
